@@ -27,3 +27,11 @@
     "mixString": "2:nnnnn/1:aaaa/1:hhh/2:mmm/2:yyy/2:dd/2:ff/2:ii/2:rr/=:ee/=:ss"
 }
 ```
+
+## To execute the unit/integration test:-
+
+    mvn clean package
+
+## Test coverage
+
+![Test Coverage Report](https://github.com/notionquest/characterscount/blob/master/Test_Coverage_Report.JPG)
