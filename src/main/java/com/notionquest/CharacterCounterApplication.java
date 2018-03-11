@@ -8,5 +8,5 @@ public class CharacterCounterApplication {
     public static void main(String[] args) {
         SpringApplication.run(CharacterCounterApplication.class, args);
     }
-    
+
 }

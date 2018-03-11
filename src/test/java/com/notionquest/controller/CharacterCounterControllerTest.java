@@ -39,16 +39,6 @@ public class CharacterCounterControllerTest {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-    //@Before
-    /*public void init() {
-        Header header = new BasicHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE);
-
-        List<Header> headers = new ArrayList<>();
-        headers.add(header);
-        CloseableHttpClient httpClient = HttpClients.custom().setDefaultHeaders(headers).build();
-        testRestTemplate.getRestTemplate().setRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient));
-    }*/
-
     @Test
     public void shouldReturn200WhenTwoStringsAreCompared() throws Exception {
         String s1 = "my&friend&Paul has heavy hats! &";
@@ -62,6 +52,36 @@ public class CharacterCounterControllerTest {
 
         then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertEquals("2:nnnnn/1:aaaa/1:hhh/2:mmm/2:yyy/2:dd/2:ff/2:ii/2:rr/=:ee/=:ss", entity.getBody().getMixString());
+    }
+
+    @Test
+    public void shouldReturn200WhenStringsHaveUpperCaseOnly() throws Exception {
+        String s1 = "AAA";
+        String s2 = "BBB";
+
+        MixStrings mixStrings = new MixStrings();
+        mixStrings.setStrings(Arrays.asList(s1, s2));
+
+        ResponseEntity<MixStringsOutcome> entity = this.testRestTemplate.postForEntity(
+                "http://localhost:" + this.port + Constants.CHARACTER_COUNT_URI,mixStrings  ,MixStringsOutcome.class);
+
+        then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertEquals("", entity.getBody().getMixString());
+    }
+
+    @Test
+    public void shouldReturn200WhenStringsHaveSpecialCharactersOnly() throws Exception {
+        String s1 = "&&&&***%%%";
+        String s2 = "(())*(*&";
+
+        MixStrings mixStrings = new MixStrings();
+        mixStrings.setStrings(Arrays.asList(s1, s2));
+
+        ResponseEntity<MixStringsOutcome> entity = this.testRestTemplate.postForEntity(
+                "http://localhost:" + this.port + Constants.CHARACTER_COUNT_URI,mixStrings  ,MixStringsOutcome.class);
+
+        then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertEquals("", entity.getBody().getMixString());
     }
 
     @Test
