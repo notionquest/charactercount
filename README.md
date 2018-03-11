@@ -34,4 +34,4 @@
 
 ## Test coverage
 
-![Test Coverage Report](https://github.com/notionquest/characterscount/blob/master/Test_Coverage_Report.JPG)
+![Test Coverage Report](https://github.com/notionquest/charactercount/blob/master/Test_Coverage_Report.JPG)
